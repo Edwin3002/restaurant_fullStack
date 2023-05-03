@@ -8,6 +8,7 @@ export default async function handler(req, res) {
   if (methods.GET === method) {
     let data;
     try {
+      return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente get" });
       if (Object.values(req.body)[0]) {
         return res.status(404).json({ code: 404, msg: "No envies nada en el body" });
       }
