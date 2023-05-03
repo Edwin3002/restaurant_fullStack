@@ -13,7 +13,6 @@ export default async function handler(req, res) {
         return res.status(404).json({ code: 404, msg: "No envies nada en el body" });
       }
       data = await ordersModel.find();
-         return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente get", data: data });
       
       if (data[0]) {
         return res.json({ code: 200, msg: "Busqueda exitosa", data: data });
@@ -24,8 +23,7 @@ export default async function handler(req, res) {
     }
   
     } else if (methods.POST === method) {
-       data = await ordersModel.find();
-    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente post", data: data });
+    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente post"});
   }
   else if (methods.PUT === method) {
     return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente put" });
