@@ -19,6 +19,15 @@ export default async function handler(req, res) {
     } catch (err) {
       console.log(err, "fallo");
     }
+  
+    } else if (methods.POST === method) {
+    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente post" });
+  }
+  else if (methods.PUT === method) {
+    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente put" });
+  }
+  else if (methods.DELELTE === method) {
+    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente delete" });
   }
   return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente" });
 }
