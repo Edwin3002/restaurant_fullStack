@@ -8,17 +8,17 @@ const orders = () => {
 
   const [openAccordion, setOpenAaccordion] = useState(null);
   const [orders, setOrders] = useState([]);
-  const socket = io("http://localhost:4000");
+//   const socket = io("http://localhost:4000");
 
   const { data: dataGetOrders, error: errorGetOrders } = useGetOrdersQuery();
 
-  useEffect(() => {
-    socket.on("message", (mse) => setOrders(mse));
+//   useEffect(() => {
+//     socket.on("message", (mse) => setOrders(mse));
 
-    return () => {
-      socket.off("message", (mse) => setOrders(mse));
-    };
-  }, []);
+//     return () => {
+//       socket.off("message", (mse) => setOrders(mse));
+//     };
+//   }, []);
 
   useEffect(() => {
     if (dataGetOrders) setOrders(dataGetOrders);
