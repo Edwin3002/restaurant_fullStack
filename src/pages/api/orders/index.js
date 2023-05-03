@@ -12,8 +12,9 @@ export default async function handler(req, res) {
       if (Object.values(req.body)[0]) {
         return res.status(404).json({ code: 404, msg: "No envies nada en el body" });
       }
-         return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente get" });
       data = (await ordersModel.find()).reverse();
+         return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente get", data: data });
+      
       if (data[0]) {
         return res.json({ code: 200, msg: "Busqueda exitosa", data: data });
       }
