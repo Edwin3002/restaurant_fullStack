@@ -24,7 +24,8 @@ export default async function handler(req, res) {
     }
   
     } else if (methods.POST === method) {
-    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente post" });
+       data = await ordersModel.find();
+    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente post", data: data });
   }
   else if (methods.PUT === method) {
     return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente put" });
