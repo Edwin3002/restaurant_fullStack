@@ -1,7 +1,9 @@
 import { connect, connection } from "mongoose";
 
-const urlMongo = "mongodb://127.0.0.1:27017/restaurant";
-connect(process.env.URLMONGO || urlMongo, {
+const urlMongo="mongodb+srv://edwin:xtelar2020@xtelardb.skvhbmg.mongodb.net/?retryWrites=true&w=majority"
+
+// const urlMongo = "mongodb://127.0.0.1:27017/restaurant";
+connect(urlMongo, {
   useNewUrlParser: true,
 });
 
