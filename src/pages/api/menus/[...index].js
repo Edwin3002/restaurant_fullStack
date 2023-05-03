@@ -1,7 +1,7 @@
 import menuModel from "@/back/models/menuModel";
 import { startBackend } from "@/back/startBackend";
-import handlerValidator, { get, post, validateRequest } from "@/back/utils/handlerValidator";
-import { check, checkExact, param } from "express-validator";
+import handlerValidator, { get, validateRequest } from "@/back/utils/handlerValidator";
+import { param } from "express-validator";
 
 
 startBackend();
