@@ -54,9 +54,9 @@ const confirmCart = () => {
         <input type="number" {...register("tableOrder")} id="success" className={`my-2 bg-tertiary-main border   text-sm rounded-lg  block w-full p-2.5 ${errors.nameCustomer && "placeholder-red-500 border-red-500"}`} placeholder="Mesa*" />
         <p className="mb-4 text-sm text-red-600">{errors.tableOrder?.message}</p>
       </div>
-      <button disabled={isLoadingCreateOrder} type="submit" className="text-white bg-secondary-main hover:bg-secondary-light focus:ring-4 focus:outline-none focus:ring-tertiary-main font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mx-auto">Campo requerido</button>
+      <button disabled={isLoadingCreateOrder} type="submit" className="text-white bg-secondary-main hover:bg-secondary-light focus:ring-4 focus:outline-none focus:ring-tertiary-main font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mx-auto">Confirma pedido</button>
     </form >
   )
 }
 
-export default confirmCart
+export default confirmCart;

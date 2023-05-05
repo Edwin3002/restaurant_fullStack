@@ -22,7 +22,10 @@ const cart = createSlice({
         state.listCart = state.listCart.concat({ ...data, amount: 1 })
         toast.success('Plato agregado');
       } else {
-        toast.error('Plato ya fue agregado!');
+        findItem.amount = findItem.amount + 1;
+        toast.success('Se aumento +1 al plato',{
+        icon: '➕',
+        });
       }
     },
     removeMoreCart: (state, action) => {

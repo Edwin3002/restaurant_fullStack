@@ -12,7 +12,7 @@ export const ordersApi = microserviceApi.injectEndpoints({
     }),
     createOrder: build.mutation({
       query: (body) => ({
-        url: `order`,
+        url: `orders`,
         method: "POST",
         body: body
       }),

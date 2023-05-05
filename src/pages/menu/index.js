@@ -47,7 +47,7 @@ const index = () => {
                 width={100}
                 height={100}
               />
-              <p className="text-center text-4xl uppercase font-semibold">{item.name}</p>
+              <p className="text-center text-3xl uppercase font-semibold">{item.name}</p>
             </CardMenu>
           </Link>
         ))

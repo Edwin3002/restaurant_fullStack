@@ -2,7 +2,7 @@ import { microserviceApi } from "..";
 
 export const menuApi = microserviceApi.injectEndpoints({
   endpoints: (build) => ({
-    getMenu: build.query({
+    getMenus: build.query({
       query: ({ category, page }) => ({
         url: `menus/${category}/${page}`,
         method: "GET",
@@ -10,9 +10,19 @@ export const menuApi = microserviceApi.injectEndpoints({
       transformResponse: (response) => response.data,
 
     }),
+    createMenu: build.mutation({
+      query: (body) => ({
+        url: `menus`,
+        method: "POST",
+        body: body
+      }),
+      transformResponse: (response) => response.msg,
+      transformErrorResponse: (response) => response.data,
+    }),
   })
 });
 
 export const {
-  useGetMenuQuery
+  useGetMenusQuery,
+  useCreateMenuMutation
 } = menuApi;

@@ -3,7 +3,6 @@ import { startBackend } from "@/back/startBackend";
 import handlerValidator, { post, validateRequest } from "@/back/utils/handlerValidator";
 import { body, check, checkExact, param } from "express-validator";
 
-
 startBackend();
 
 const createMenuValidator = validateRequest([
@@ -17,7 +16,7 @@ const createMenuValidator = validateRequest([
   //description
   check("description")
     .isString().withMessage("El campo debe ser alfanumerico")
-    .isLength({ min: 10, max: 200 }).withMessage("El campo debe ser min. 10 y max. 200 caracteres")
+    .isLength({ min: 10, max: 100 }).withMessage("El campo debe ser min. 10 y max. 200 caracteres")
     .exists().withMessage("El campo no existe")
     .notEmpty().withMessage("El campo esta vacio").trim(),
   //img
