@@ -6,7 +6,7 @@ const validateRequest = (validations) => {
         await Promise.all(validations.map((validation) => validation.run(req)))
         const errors = validationResult(req)
         if (errors.isEmpty()) return next()
-        res.status(400).json({ code: 404, ...errors })
+        res.status(400).json({ code: 404, ...errors, route: "validator" })
     }
 }
 
@@ -24,7 +24,7 @@ const post = (middleware) => {
     return nextConnect().post(middleware);
 }
 const put = (middleware) => {
-    return nextConnect().post(middleware);
+    return nextConnect().put(middleware);
 }
 const remove = (middleware) => {
     return nextConnect().delete(middleware);
@@ -35,3 +35,19 @@ const remove = (middleware) => {
 const handlerValidator = nextConnect();
 export default handlerValidator;
 export { validateRequest, get, post, put, remove /* Dont forget to use export your PUT middleware or other*/ }
+
+
+
+
+export const initMiddleware = middleware => {
+    return (req, res) =>
+        new Promise((resolve, reject) => {
+            middleware(req, res, (result) => {
+                if (result instanceof Error) {
+                    return reject(result)
+                }
+                return resolve(result)
+            })
+        })
+}
+

@@ -1,7 +1,8 @@
-import { check, checkExact } from "express-validator";
-import { validateRequest } from "../helpers/validateRequest.js";
+import { body, check, checkExact } from "express-validator";
+import { validationResult } from "express-validator";
+import { initMiddleware, validateRequest } from "../utils/handlerValidator";
 
-export const createUpdateOrderValidator = [
+export const createUpdateOrderValidator = initMiddleware(validateRequest([
   //_id
   check("_id")
     .optional()
@@ -17,26 +18,20 @@ export const createUpdateOrderValidator = [
     .trim(),
   //tableOrder
   check("tableOrder")
-    .isInt({ gt: 0, lt: 100 }).withMessage("El campo debe ser numerico 1")
+    .isInt({ gt: 0, lt: 100 }).withMessage("El campo debe ser numerico")
     .exists().withMessage("El campo no existe")
     .notEmpty().withMessage("El campo esta vacio"),
-  // check("codeOrder")
-  //   .optional()
-  //   .isString().withMessage("El campo debe ser alfanumerico")
-  //   .isLength({ min: 5, max: 5 }).withMessage("El campo debe ser min. 5")
-  //   .notEmpty().withMessage("El campo esta vacio")
-  //   .trim(),
   //amountOrder
   check("amountOrder")
-    .isInt({ gt: 0 }).withMessage("El campo debe ser numerico 2")
+    .isInt({ gt: 0 }).withMessage("El campo debe ser numerico")
     .exists().withMessage("El campo no existe")
-    .notEmpty().withMessage("El campo esta vacio").trim(),
+    .notEmpty().withMessage("El campo esta vacio"),
   //totalPriceOrder
   check("totalPriceOrder")
-    .isInt({ gt: 999 }).withMessage("El campo debe ser numerico 3 y debe ser min. 1000")
+    .isInt({ gt: 999 }).withMessage("El campo debe ser numerico y min. 1000")
     .exists().withMessage("El campo no existe")
     .notEmpty().withMessage("El campo esta vacio").trim(),
-  //listOrder
+  // listOrder
   check("listOrder")
     .isArray({ min: 1 }).withMessage("El campo debe ser una lista/array y debe tener min. una orden")
     .exists().withMessage("El campo no existe")
@@ -50,15 +45,14 @@ export const createUpdateOrderValidator = [
     .trim(),
   //"listOrder[*].amount"
   check("listOrder[*].amount")
-    .isInt({ gt: 0 }).withMessage("El campo debe ser numerico 4")
+    .isInt({ min: 1 }).withMessage("El campo debe ser numerico y min. 1")
     .exists().withMessage("El campo no existe")
     .notEmpty().withMessage("El campo esta vacio"),
   //"listOrder[*].price"
   check("listOrder[*].price")
-    .isInt().withMessage("El campo debe ser numerico 5")
-    .isFloat({ min: 1000 }).withMessage("El campo debe ser min. 1000")
+    .isInt({ min: 999 }).withMessage("El campo debe ser numerico y min. 1000")
     .exists().withMessage("El campo no existe")
-    .notEmpty().withMessage("El campo esta vacio").trim(),
+    .notEmpty().withMessage("El campo esta vacio"),
   //listOrder[*].category
   check("listOrder[*].category")
     .isString().withMessage("El campo debe ser alfanumerico")
@@ -71,26 +65,5 @@ export const createUpdateOrderValidator = [
     .isLength({ min: 15 }).withMessage("El campo debe ser min. 15 caracteres")
     .exists().withMessage("El campo no existe")
     .notEmpty().withMessage("El campo esta vacio").trim(),
-  checkExact([], { message: "Los campos solo pueden ser [ nameCustomer, tableOrder, amountOrder, totalPriceOrder, listOrder ]" }),
-  (req, res, next) => {
-    validateRequest(req, res, next);
-  }
-];
-
-export const updateStateOrderValidator = [ //TODO:name, age, email
-  //id
-  check("_id")
-    .isMongoId().withMessage("El campo debe ser un ID")
-    .exists().withMessage("El campo no existe")
-    .notEmpty().withMessage("El campo esta vacio")
-    .trim(),
-  check("stateOrder")
-    .isString().withMessage("El campo debe ser alfanumerico")
-    .isIn(["cancelado", "cocinandose", "entregandose"]).withMessage("Los campos solo pueden ser [ cancelado, cocinandose, entregandose ]")
-    .exists().withMessage("El campo no existe")
-    .notEmpty().withMessage("El campo esta vacio")
-    .trim(),
-  (req, res, next) => {
-    validateRequest(req, res, next);
-  }
-];
+  checkExact([body('nameCustomer'), body('tableOrder'), body('amountOrder'), body('totalPriceOrder'), body('listOrder')], { message: "Los campos solo pueden ser [ nameCustomer, tableOrder, amountOrder, totalPriceOrder, listOrder ]" }),
+], validationResult));
