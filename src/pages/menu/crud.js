@@ -10,6 +10,7 @@ import { toast } from 'react-hot-toast';
 const crud = () => {
 
   const [valueFile, setValueFile] = useState(null);
+  const [disabledButton, setDisabledButton] = useState(0)
   const [valoresIniciales, setValoresIniciales] = useState({ name: "", description: "", price: "", img: "" });
 
   const [createMenu, { data: dataCreateMenu, error: errorCreateMenu, isLoading: isLoadingCreateMenu }] = useCreateMenuMutation();
@@ -17,6 +18,7 @@ const crud = () => {
   const { register, handleSubmit, formState: { errors }, setValue, reset } = useForm({ resolver: yupResolver(yupMenuCrud), values: valoresIniciales });
 
   const onSubmit = async dataForm => {
+    setDisabledButton(1);
     const imgCloudinary = await uploadImage(dataForm.img);
     const newData = { ...dataForm, img: imgCloudinary.url }
     createMenu(newData);
@@ -33,6 +35,7 @@ const crud = () => {
     } else {
       errorCreateMenu?.errors?.map(item => toast.error(item.msg));
     }
+    setDisabledButton(0);
   }, [dataCreateMenu, errorCreateMenu]);
 
   return (
@@ -71,7 +74,7 @@ const crud = () => {
         </select>
         <p className="mb-4 text-sm text-red-600">{errors.category?.message}</p>
       </div>
-      <button disabled={isLoadingCreateMenu} type="submit" className="text-white disabled:bg-gray-700 bg-secondary-main hover:bg-secondary-light focus:ring-4 focus:outline-none focus:ring-tertiary-main font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mx-auto">Confirmar pedido</button>
+      <button disabled={disabledButton} type="submit" className="text-white disabled:bg-gray-700 bg-secondary-main hover:bg-secondary-light focus:ring-4 focus:outline-none focus:ring-tertiary-main font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mx-auto">Confirmar pedido</button>
     </form >
   )
 }
