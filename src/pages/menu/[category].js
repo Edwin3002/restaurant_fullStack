@@ -66,4 +66,4 @@ export async function getServerSideProps() {
   }
 }
 
-export default menus;
+export default menus

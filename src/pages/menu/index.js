@@ -4,7 +4,7 @@ import Titles from '@/components/typography/Titles'
 import Link from 'next/link'
 import React from 'react'
 
-const index = () => {
+const menu = () => {
 
   const carouselData = [
     {
@@ -57,4 +57,4 @@ const index = () => {
   )
 }
 
-export default index;
+export default menu

@@ -1,18 +1,15 @@
+import { methods } from "@/back/constants/methods";
 import menuModel from "@/back/models/menuModel";
 import { startBackend } from "@/back/startBackend";
-import handlerValidator, { get, validateRequest } from "@/back/utils/handlerValidator";
-import { param } from "express-validator";
-
+import { listMenusValidator } from "@/back/validators/menuValidator";
 
 startBackend();
-const listMenusValidator = validateRequest([
-  param("category").isString().withMessage("El campo debe ser una palabra").optional(),
-  param("page").isInt().withMessage("El campo debe ser un numero entero").optional(),
-]);
 
-export default handlerValidator.use(get(listMenusValidator))
-  .get(async (req, res) => {
+export default async function handler(req, res) {
+  const method = req.method;
+  if (methods.GET === method) {
     try {
+      await listMenusValidator(req, res)
       let data = [];
       if (Object.values(req.body)[0]) {
         return res.status(404).json({ code: 404, msg: "No envies nada en el body", route: "menus, get" });
@@ -53,5 +50,6 @@ export default handlerValidator.use(get(listMenusValidator))
     } catch (err) {
       console.log(" error" + err + "fallo la peticion");
     }
-    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente", route: "menus, get"  });
-  })
+    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente", route: "menus, get 21" });
+  }
+}

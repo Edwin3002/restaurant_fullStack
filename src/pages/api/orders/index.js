@@ -1,6 +1,6 @@
 import { startBackend } from "@/back/startBackend";
 import ordersModel from "@/back/models/ordersModel";
-import { methods } from "@/back/utils/methods";
+import { methods } from "@/back/constants/methods";
 import { createUpdateOrderValidator } from "@/back/validators/ordersValidator";
 
 startBackend();
@@ -53,8 +53,6 @@ startBackend();
 //     return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente", route: "orders, psot" });
 //   })
 
-
-
 export default async function handler(req, res) {
   const method = req.method;
   if (methods.GET === method) {
@@ -65,7 +63,7 @@ export default async function handler(req, res) {
       }
       data = await ordersModel.find();
       if (data[0]) {
-        return res.json({ code: 200, msg: "Busqueda exitosa", data: data });
+        return res.json({ code: 200, msg: "Busqueda exitosa", data: data, route: "orders, get" });
       }
       return res.status(404).json({ code: 404, msg: "Busqueda fallida, no hay resgistros, intente otra pagina o la anterior" });
     } catch (err) {
@@ -79,7 +77,7 @@ export default async function handler(req, res) {
         return res.status(404).json({ code: 404, msg: "No envies un id, estas creando", route: "orders, post" });
       }
       await ordersModel.create(data);
-      res.status(200).json({ code: 200, msg: "Creacion exitosa" });
+      res.status(200).json({ code: 200, msg: "Creacion exitosa", route: "orders, post" });
       // io.emit("message", (await ordersModel.find()).reverse());
       return;
     } catch (err) {
@@ -92,13 +90,12 @@ export default async function handler(req, res) {
       delete data._id;
       if (await ordersModel.findById(id)) {
         await ordersModel.findByIdAndUpdate(id, data);
-        return res.status(200).json({ code: 200, msg: "Actualizacion exitosa" });
+        return res.status(200).json({ code: 200, msg: "Actualizacion exitosa", route: "orders, put" });
       }
       return res.status(404).json({ code: 404, msg: "El ID no se encuentra registrado", route: "orders, put" });
     } catch (error) {
       console.log("error" + error + "fallo la actualizacion");
     }
   }
-
-  return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente", route: "orders, get" });
+  return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente", route: "orders" });
 }

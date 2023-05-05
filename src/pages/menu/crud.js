@@ -19,10 +19,18 @@ const crud = () => {
 
   const onSubmit = async dataForm => {
     setDisabledButton(1);
-    const imgCloudinary = await uploadImage(dataForm.img);
-    const newData = await { ...dataForm, img: imgCloudinary.url };
-    console.log(await newData);
-    createMenu(await newData);
+    try {
+      const imgCloudinary = await uploadImage(dataForm.img);
+      const newData = await { ...dataForm, img: imgCloudinary?.url };
+      console.log(await newData);
+      createMenu(await newData);
+    } catch (error) {
+      toast.error("Fallo, la carga de imagen")
+      console.log(error, "error de cargar de imagen");
+    } 
+    setTimeout(() => {
+      setDisabledButton(0);
+    }, 10000);
   };
 
   useEffect(() => {
