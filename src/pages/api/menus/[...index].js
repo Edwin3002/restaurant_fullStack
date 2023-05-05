@@ -15,7 +15,7 @@ export default handlerValidator.use(get(listMenusValidator))
     try {
       let data = [];
       if (Object.values(req.body)[0]) {
-        return res.status(404).json({ code: 404, msg: "No envies nada en el body" });
+        return res.status(404).json({ code: 404, msg: "No envies nada en el body", route: "menus, get" });
       }
       let category = req.query?.index[0];
       let page = req.query?.index[1];
@@ -49,9 +49,9 @@ export default handlerValidator.use(get(listMenusValidator))
       if (data[0]) {
         return res.json({ code: 200, msg: "Busqueda exitosa", data: data });
       }
-      return res.status(404).json({ code: 404, msg: "Busqueda fallida, no hay resgistros, intente otra pagina o la anterior" });
+      return res.status(404).json({ code: 404, msg: "Busqueda fallida, no hay resgistros, intente otra pagina o la anterior", route: "menus, get" });
     } catch (err) {
       console.log(" error" + err + "fallo la peticion");
     }
-    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente" });
+    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente", route: "menus, get"  });
   })

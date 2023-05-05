@@ -73,13 +73,12 @@ const createUpdateOrderValidator = validateRequest([
 
 export default handlerValidator.use(post(createUpdateOrderValidator), put(createUpdateOrderValidator))
   .get(async (req, res) => {
-    let data;
     try {
+    let data;
       if (Object.values(req.body)[0]) {
         return res.status(404).json({ code: 404, msg: "No envies nada en el body" });
       }
       data = await ordersModel.find();
-
       if (data[0]) {
         return res.json({ code: 200, msg: "Busqueda exitosa", data: data });
       }
@@ -87,14 +86,13 @@ export default handlerValidator.use(post(createUpdateOrderValidator), put(create
     } catch (err) {
       console.log(err, "fallo");
     }
-    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente" });
+    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente", route: "orders, get" });
   })
   .post(async (req, res) => {
     try {
       const data = req.body;
-      console.log(data);
       if (data._id) {
-        return res.status(404).json({ code: 404, msg: "No envies un id, estas creando" });
+        return res.status(404).json({ code: 404, msg: "No envies un id, estas creando", route: "orders, post" });
       }
       await ordersModel.create(data);
       res.status(200).json({ code: 200, msg: "Creacion exitosa" });
@@ -103,7 +101,7 @@ export default handlerValidator.use(post(createUpdateOrderValidator), put(create
     } catch (err) {
       console.log("error" + err + "fallo la creacion");
     }
-    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente" });
+    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente", route: "orders, post" });
   })
   .put(async (req, res) => {
     try {
@@ -114,9 +112,9 @@ export default handlerValidator.use(post(createUpdateOrderValidator), put(create
         await ordersModel.findByIdAndUpdate(id, data);
         return res.status(200).json({ code: 200, msg: "Actualizacion exitosa" });
       }
-      return res.status(404).json({ code: 404, msg: "El ID no se encuentra registrado" });
+      return res.status(404).json({ code: 404, msg: "El ID no se encuentra registrado", route: "orders, put" });
     } catch (error) {
       console.log("error" + error + "fallo la actualizacion");
     }
-    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente" });
+    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente", route: "orders, psot" });
   })

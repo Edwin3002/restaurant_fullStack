@@ -49,5 +49,5 @@ export default handlerValidator.use(post(createMenuValidator))
     } catch (err) {
       console.log("error" + err + "fallo la creacion");
     }
-    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente" });
+    return res.status(404).json({ code: 404, msg: "Error inesperado, intente nuevamente", route: "menus, post" });
   })

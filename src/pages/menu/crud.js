@@ -20,8 +20,9 @@ const crud = () => {
   const onSubmit = async dataForm => {
     setDisabledButton(1);
     const imgCloudinary = await uploadImage(dataForm.img);
-    const newData = await { ...dataForm, img: imgCloudinary.url }
-    await createMenu(newData);
+    const newData = await { ...dataForm, img: imgCloudinary.url };
+    console.log(await newData);
+    createMenu(await newData);
   };
 
   useEffect(() => {
