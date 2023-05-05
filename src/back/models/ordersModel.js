@@ -29,7 +29,7 @@ const ordersSchema = new Schema({
   },
 },
 {
-  timeStamp: true
+  timestamps: true
 });
 
 export default models.orders || model("orders", ordersSchema);

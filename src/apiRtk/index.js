@@ -2,7 +2,7 @@ import { urlApiProject } from '@/constants/urls';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { HYDRATE } from 'next-redux-wrapper'
 
-const baseQuery = fetchBaseQuery({ baseUrl: "https://restaurant-full-stack.vercel.app/api/" ,
+const baseQuery = fetchBaseQuery({ baseUrl: "http://localhost:3000/api/" ,
   extraOptions: { timeout: 30000 },
   prepareHeaders: (headers, { getState }) => {
     headers.set("content-type", "application/json");

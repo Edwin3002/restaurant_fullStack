@@ -1,5 +1,6 @@
 import { useGetMenusQuery } from '@/apiRtk/apis/menuApi';
 import Titles from '@/components/typography/Titles';
+import { formatPrice } from '@/helpers/formats';
 import { addItemCart } from '@/redux/slices/cartSlice';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -41,7 +42,7 @@ const menus = ({ da }) => {
               <p className='text-justify'>{item.description}</p>
               <div className='flex justify-around'>
                 <span className='font-bold flex items-center'>
-                  $ {item.price}
+                  {formatPrice(item.price)}
                 </span>
                 <span className='bg-secondary-main p-1 rounded-lg' onClick={() => addDish(item._id, item.name, item.price, item.img, item.category)}>
                   <i className="bi bi-plus-lg text-xl text-primary-main"></i>

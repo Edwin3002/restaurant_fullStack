@@ -31,7 +31,7 @@ const menuSchema = new Schema({
   },
 },
   {
-    timeStamp: true
+    timestamps: true
   });
 
 export default models.menus || model("menus", menuSchema);
