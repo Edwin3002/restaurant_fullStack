@@ -30,7 +30,7 @@ export const createUpdateOrderValidator = initMiddleware(validateRequest([
   check("totalPriceOrder")
     .isInt({ gt: 999 }).withMessage("El campo debe ser numerico y min. 1000")
     .exists().withMessage("El campo no existe")
-    .notEmpty().withMessage("El campo esta vacio").trim(),
+    .notEmpty().withMessage("El campo esta vacio"),
   // listOrder
   check("listOrder")
     .isArray({ min: 1 }).withMessage("El campo debe ser una lista/array y debe tener min. una orden")
@@ -64,6 +64,6 @@ export const createUpdateOrderValidator = initMiddleware(validateRequest([
     .isString().withMessage("El campo debe ser alfanumerico")
     .isLength({ min: 15 }).withMessage("El campo debe ser min. 15 caracteres")
     .exists().withMessage("El campo no existe")
-    .notEmpty().withMessage("El campo esta vacio").trim(),
+    .notEmpty().withMessage("El campo esta vacio"),
   checkExact([body('nameCustomer'), body('tableOrder'), body('amountOrder'), body('totalPriceOrder'), body('listOrder')], { message: "Los campos solo pueden ser [ nameCustomer, tableOrder, amountOrder, totalPriceOrder, listOrder ]" }),
 ], validationResult));
