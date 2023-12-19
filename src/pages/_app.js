@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }) {
   return (
     <div className="bg-primary-main" >
       <ReduxProvider>
-        <Toaster position="bottom-right"/>
+        <Toaster position="top-center"/>
         <NavbarLayout />
         <hr className=" pb-20" />
         <Component  {...pageProps} />

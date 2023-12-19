@@ -1,6 +1,7 @@
 import { useGetOrdersQuery } from '@/apiRtk/apis/ordersApi';
 import Titles from '@/components/typography/Titles';
 import { formatPrice } from '@/helpers/formats';
+import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react'
 import { Socket, io } from 'socket.io-client';
 
@@ -8,17 +9,9 @@ const orders = () => {
 
   const [openAccordion, setOpenAaccordion] = useState(null);
   const [orders, setOrders] = useState([]);
-//   const socket = io("http://localhost:4000");
 
   const { data: dataGetOrders, error: errorGetOrders } = useGetOrdersQuery();
 
-//   useEffect(() => {
-//     socket.on("message", (mse) => setOrders(mse));
-
-//     return () => {
-//       socket.off("message", (mse) => setOrders(mse));
-//     };
-//   }, []);
 
   useEffect(() => {
     if (dataGetOrders) setOrders(dataGetOrders);
@@ -31,8 +24,13 @@ const orders = () => {
         <table key={index + item.nameCustomer} className="w-full font-medium text-left  border border-b-0 border-gray-200  dark:border-gray-700 ">
           <thead className="  text-xs" onClick={() => setOpenAaccordion(openAccordion == index ? null : index)}>
             <tr className=' flex justify-between'>
-              <th rowSpan={1} className="px-6 py-3 w-3/12">
+              <th rowSpan={1} className="px-6 py-3 w-3/12 flex flex-col">
+              <div>
                 {item.nameCustomer}
+              </div>
+              <div>
+                {format(item?.createdAt, "K:m MM/dd/yyyy")}
+              </div>
               </th>
               <th rowSpan={1} className="px-6 py-3 w-2/12">
                 Mesa: {item.tableOrder}

@@ -22,7 +22,7 @@ const menus = ({ da }) => {
   return (
     <div>
       <Titles>~ Menú ~</Titles>
-      <div className='bg-tertiary-main border rounded-3xl py-4 px-2'>
+      <div className='bg-tertiary-main border rounded-3xl py-4 px-2 mx-4'>
         {dataGetMenu?.map((item, index) => (
           <div key={index + item._id} className='mt-4 flex justify-between bg-tertiary-main'>
             <div className='border rounded-3xl w-2/5 h-24 '>

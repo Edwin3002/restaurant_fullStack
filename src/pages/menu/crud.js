@@ -1,4 +1,5 @@
 import { useCreateMenuMutation } from '@/apiRtk/apis/menuApi';
+import Titles from '@/components/typography/Titles';
 import { convertToBase64 } from '@/constants/inputs';
 import { formatPrice } from '@/helpers/formats';
 import { uploadImage } from '@/helpers/uploadImage';
@@ -49,8 +50,9 @@ const crud = () => {
   }, [dataCreateMenu, errorCreateMenu]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='w-3/4 m-auto flex flex-col'>
-      <div className="my-6">
+    <form onSubmit={handleSubmit(onSubmit)} className='w-3/4 mx-auto mb-4 flex flex-col'>
+    <Titles>~ Agregar platos al menú ~</Titles>
+      <div className="my-4">
         <label htmlFor="name" className="block mt-4 text-sm font-medium">Nombre</label>
         <input type="text" {...register("name", { required: "Campo requerido", maxLength: 20 })} id="name" className={`my-2 bg-tertiary-main border   text-sm rounded-lg  block w-full p-2.5 ${errors.name && "placeholder-red-500 border-red-500"}`} placeholder="Nombre*" />
         <p className="mb-4 text-sm text-red-600">{errors.name?.message}</p>
