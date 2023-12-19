@@ -3,7 +3,6 @@ import Titles from '@/components/typography/Titles';
 import { formatPrice } from '@/helpers/formats';
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react'
-import { Socket, io } from 'socket.io-client';
 
 const orders = () => {
 
@@ -28,9 +27,7 @@ const orders = () => {
               <div>
                 {item.nameCustomer}
               </div>
-              <div>
-                {format(item?.createdAt, "K:m MM/dd/yyyy")}
-              </div>
+
               </th>
               <th rowSpan={1} className="px-6 py-3 w-2/12">
                 Mesa: {item.tableOrder}
