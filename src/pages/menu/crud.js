@@ -58,7 +58,7 @@ const crud = () => {
         <textarea type="" {...register("description")} id="description" className={`my-2 bg-tertiary-main border   text-sm rounded-lg  block w-full p-2.5 ${errors.description && "placeholder-red-500 border-red-500"}`} placeholder="Descripción*" />
         <p className="mb-4 text-sm text-red-600">{errors.description?.message}</p>
         <label htmlFor="price" className="block mb-2 text-sm font-medium">Precio</label>
-        <input type="number" {...register(formatPrice("price"))} id="price" className={`my-2 bg-tertiary-main border   text-sm rounded-lg  block w-full p-2.5 ${errors.price && "placeholder-red-500 border-red-500"}`} placeholder="Precio*" />
+        <input type="number" {...register("price")} id="price" className={`my-2 bg-tertiary-main border   text-sm rounded-lg  block w-full p-2.5 ${errors.price && "placeholder-red-500 border-red-500"}`} placeholder="Precio*" />
         <p className="mb-4 text-sm text-red-600">{errors.price?.message}</p>
         <div className='flex flex-col md:flex-row gap-4'>
           <section className='w-full md:w-3/4 '>
